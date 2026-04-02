@@ -39,7 +39,12 @@ The final phase — converting the static HTML comparison page into a pixel-perf
 
 **Code changes: 1,997 lines added, 42 removed**
 
-## Running the apps
+## Live demo
+
+- **App:** https://apresmoi-dh.github.io/agentic-engineering-live-coding-demo/
+- **Slides:** https://apresmoi-dh.github.io/agentic-engineering-live-coding-demo/slides/
+
+## Running locally
 
 ```bash
 npm install
