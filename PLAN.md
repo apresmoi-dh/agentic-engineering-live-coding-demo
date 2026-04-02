@@ -93,6 +93,40 @@ soc_display: null              # optional display override for SoC
 flash_display: null            # optional display override for flash
 ```
 
+## Agent Team
+
+### Execution Timeline
+```
+Phase 1 (lead, sequential):       scaffold → types
+                                       │
+Phase 2 (4 agents, parallel):        ├── data-agent   (haiku)
+                                       ├── styles-agent (haiku)
+                                       ├── logic-agent  (sonnet)
+                                       └── ui-agent     (sonnet)
+                                              │
+Phase 3 (1 agent, after phase 2):     compare-agent    (sonnet)
+                                              │
+Phase 4 (lead):                       App.tsx + main.tsx wiring
+                                              │
+Phase 5 (lead):                       Playwright screenshot → compare → fix
+```
+
+### Agent Assignments
+
+| Agent | Model | Scope | Tasks |
+|---|---|---|---|
+| **Lead (me)** | opus | Scaffold, types, App.tsx wiring, verification | 1, 2, 11, 12, 13 |
+| **data-agent** | haiku | Move specs + add frontmatter + `loadSpecs.ts` | 3, 4 |
+| **styles-agent** | haiku | Copy CSS from `compare.html` → `App.css` | 5 |
+| **logic-agent** | sonnet | `filters.ts`, `bestInClass.ts`, `formatters.ts`, `sections.ts` | 6 |
+| **ui-agent** | sonnet | Nav, Page, PageHeader, Tag, VerdictBadge, FilterChip | 7, 8 |
+| **compare-agent** | sonnet | Filters, CompareCard (all 7 subcomponents) | 9, 10 |
+
+### Model Rationale
+- **haiku** for data + styles: mechanical copy/transform with no design decisions
+- **sonnet** for logic + ui + compare: needs to follow contracts precisely, moderate reasoning
+- **opus** stays on lead: orchestration, wiring, and Playwright verification need full context
+
 ## Tasks
 
 ### Task 1 — Scaffold Vite + React + TS project
