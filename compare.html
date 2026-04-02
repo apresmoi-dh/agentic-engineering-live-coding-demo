@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Vacuum Comparison — foodora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── CAPE Design System tokens ── */
+    :root {
+      --cp-spacing-none: 0; --cp-spacing-tiny: 2px; --cp-spacing-xsmall: 4px;
+      --cp-spacing-small: 8px; --cp-spacing-medium: 12px; --cp-spacing-large: 16px;
+      --cp-spacing-xlarge: 20px; --cp-spacing-2xlarge: 24px; --cp-spacing-3xlarge: 32px;
+      --cp-spacing-4xlarge: 36px; --cp-spacing-5xlarge: 40px; --cp-spacing-6xlarge: 48px;
+
+      --cp-base-spacing-small: 8px; --cp-base-spacing-medium: 12px;
+      --cp-base-spacing-large: 16px; --cp-base-spacing-xlarge: 20px;
+      --cp-base-spacing-2xlarge: 24px; --cp-base-spacing-3xlarge: 32px;
+
+      --cp-action-spacing-small: 8px; --cp-action-spacing-medium: 12px;
+      --cp-action-spacing-large: 16px; --cp-action-spacing-xlarge: 20px;
+
+      --cp-sizing-xsmall: 16px; --cp-sizing-small: 20px; --cp-sizing-medium: 24px;
+      --cp-sizing-large: 32px; --cp-sizing-xlarge: 40px; --cp-sizing-2xlarge: 48px;
+
+      --cp-action-sizing-xsmall: 32px; --cp-action-sizing-small: 40px;
+      --cp-action-sizing-medium: 48px;
+
+      --cp-icon-sizing-small: 16px; --cp-icon-sizing-medium: 24px;
+
+      --cp-font-family-figtree-ltr: 'Figtree', system-ui, sans-serif;
+      --cp-text-display2xlarge: 700 36px/1.25 'Figtree', system-ui, sans-serif;
+      --cp-text-display-large:   700 24px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-display-medium:  700 20px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-display-small:   700 16px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-display-xsmall:  700 14px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-subtitle-large:  600 16px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-subtitle-medium: 600 14px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-subtitle-small:  600 12px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-body-large:      500 16px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-body-medium:     500 14px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-body-small:      500 12px/1.5  'Figtree', system-ui, sans-serif;
+      --cp-text-caption:         700 10px/1.6  'Figtree', system-ui, sans-serif;
+
+      --cp-base-border-radius-xlarge: 20px; --cp-base-border-radius-large: 12px;
+      --cp-base-border-radius-medium: 8px;  --cp-base-border-radius-small: 6px;
+      --cp-action-border-radius-medium: 8px; --cp-action-border-radius-pill: 200px;
+      --cp-tag-border-radius-medium: 8px;
+
+      --cp-base-border-width-small: 1px; --cp-base-border-width-medium: 2px;
+      --cp-action-border-width-small: 1px;
+
+      --cp-color-jacaranda-grey-00: #FFFFFF;
+      --cp-color-jacaranda-grey-01: #F4F5F6;
+      --cp-color-jacaranda-grey-05: #E9EAEC;
+      --cp-color-jacaranda-grey-10: #CECED4;
+      --cp-color-jacaranda-grey-50: #6C6D73;
+      --cp-color-jacaranda-grey-80: #343437;
+      --cp-color-jacaranda-grey-99: #141415;
+
+      --cp-color-cape-success-05: #E5F5EC; --cp-color-cape-success-60: #048A42; --cp-color-cape-success-95: #012D15;
+      --cp-color-cape-danger-05:  #FCEBE8; --cp-color-cape-danger-60:  #D62D0B; --cp-color-cape-danger-95:  #601405;
+      --cp-color-cape-warning-05: #FFF8DF; --cp-color-cape-warning-60: #FFC400; --cp-color-cape-warning-95: #664200;
+
+      /* Foodora brand layer */
+      --foodora-pink: #D60265;
+      --foodora-pink-light: #FDE8F1;
+      --foodora-pink-dark: #5A012B;
+      --cp-color-cape-highlight-05: #FDE8F1;
+      --cp-color-cape-highlight-60: #D60265;
+      --cp-color-cape-highlight-95: #5A012B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--cp-font-family-figtree-ltr);
+      background-color: var(--cp-color-jacaranda-grey-01);
+      color: var(--cp-color-jacaranda-grey-80);
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      background-color: var(--foodora-pink);
+      padding: var(--cp-spacing-medium) var(--cp-spacing-3xlarge);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font: var(--cp-text-display-medium);
+      color: var(--cp-color-jacaranda-grey-00);
+    }
+    .nav-links {
+      display: flex;
+      gap: var(--cp-spacing-2xlarge);
+      list-style: none;
+    }
+    .nav-links a {
+      font: var(--cp-text-subtitle-medium);
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover, .nav-links a[aria-current] { color: #fff; }
+
+    /* ── Page ── */
+    .page {
+      max-width: 1400px;
+      margin-inline: auto;
+      padding: var(--cp-spacing-5xlarge) var(--cp-spacing-3xlarge);
+    }
+
+    .page-header { margin-block-end: var(--cp-spacing-3xlarge); }
+
+    .page-title {
+      font: var(--cp-text-display2xlarge);
+      color: var(--cp-color-jacaranda-grey-99);
+      margin-block-end: var(--cp-spacing-small);
+    }
+    .page-subtitle {
+      font: var(--cp-text-body-large);
+      color: var(--cp-color-jacaranda-grey-50);
+    }
+
+    /* ── Filters ── */
+    .filters {
+      background-color: var(--cp-color-jacaranda-grey-00);
+      border: var(--cp-base-border-width-small) solid var(--cp-color-jacaranda-grey-05);
+      border-radius: var(--cp-base-border-radius-large);
+      padding: var(--cp-base-spacing-large) var(--cp-base-spacing-2xlarge);
+      margin-block-end: var(--cp-spacing-2xlarge);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--cp-spacing-medium);
+    }
+    .filters-label {
+      font: var(--cp-text-subtitle-medium);
+      color: var(--cp-color-jacaranda-grey-50);
+      margin-inline-end: var(--cp-spacing-xsmall);
+      white-space: nowrap;
+    }
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-spacing-xsmall);
+      padding: 0 var(--cp-action-spacing-large);
+      height: var(--cp-action-sizing-xsmall);
+      border-radius: var(--cp-action-border-radius-pill);
+      border: var(--cp-action-border-width-small) solid var(--cp-color-jacaranda-grey-10);
+      background: var(--cp-color-jacaranda-grey-00);
+      font: var(--cp-text-body-small);
+      color: var(--cp-color-jacaranda-grey-80);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .filter-chip:hover {
+      border-color: var(--foodora-pink);
+      color: var(--foodora-pink);
+    }
+    .filter-chip.active {
+      background: var(--foodora-pink-light);
+      border-color: var(--foodora-pink);
+      color: var(--foodora-pink-dark);
+    }
+    .chip-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+    .filter-chip.active .chip-dot { opacity: 1; }
+
+    /* ── Compare card ── */
+    .compare-card {
+      background-color: var(--cp-color-jacaranda-grey-00);
+      border: var(--cp-base-border-width-small) solid var(--cp-color-jacaranda-grey-05);
+      border-radius: var(--cp-base-border-radius-xlarge);
+      overflow: hidden;
+    }
+
+    /* ── Rows ── */
+    .compare-row {
+      display: flex;
+      width: 100%;
+      border-block-start: var(--cp-base-border-width-small) solid var(--cp-color-jacaranda-grey-05);
+    }
+    .compare-row:first-child { border-block-start: none; }
+    .compare-row:not(.section-row):hover { background-color: var(--cp-color-jacaranda-grey-01); }
+
+    .label-cell {
+      min-width: 160px;
+      width: 160px;
+      flex-shrink: 0;
+      padding: var(--cp-spacing-medium) var(--cp-spacing-large);
+      font: var(--cp-text-body-small);
+      color: var(--cp-color-jacaranda-grey-50);
+      display: flex;
+      align-items: center;
+    }
+
+    .compare-cell {
+      flex: 1;
+      min-width: 0;
+      padding: var(--cp-spacing-medium) var(--cp-spacing-large);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font: var(--cp-text-subtitle-small);
+      color: var(--cp-color-jacaranda-grey-80);
+      border-inline-start: var(--cp-base-border-width-small) solid var(--cp-color-jacaranda-grey-05);
+    }
+    .compare-cell.best { color: var(--foodora-pink); }
+    .compare-cell.faded { opacity: 0.4; }
+    .compare-cell[data-hidden="true"] { display: none; }
+
+    /* ── Product header row ── */
+    .header-row { border-block-start: none; }
+    .header-row .compare-cell {
+      padding: var(--cp-spacing-2xlarge) var(--cp-spacing-large);
+      flex-direction: column;
+      gap: var(--cp-spacing-small);
+    }
+    .header-row .label-cell {
+      align-items: flex-end;
+      padding-block-end: var(--cp-spacing-2xlarge);
+    }
+    .header-count {
+      font: var(--cp-text-body-small);
+      color: var(--cp-color-jacaranda-grey-50);
+    }
+    .product-img {
+      max-width: 140px;
+      height: 120px;
+      object-fit: contain;
+    }
+    .product-brand {
+      font: var(--cp-text-caption);
+      color: var(--cp-color-jacaranda-grey-50);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .product-name {
+      font: var(--cp-text-display-small);
+      color: var(--cp-color-jacaranda-grey-99);
+    }
+    .product-price {
+      font: var(--cp-text-subtitle-large);
+      color: var(--foodora-pink);
+    }
+
+    /* ── Section header rows ── */
+    .section-row {
+      background-color: var(--cp-color-jacaranda-grey-01);
+      padding: var(--cp-spacing-medium) var(--cp-spacing-large);
+      font: var(--cp-text-subtitle-medium);
+      color: var(--cp-color-jacaranda-grey-80);
+      display: flex;
+      align-items: center;
+      gap: var(--cp-spacing-small);
+    }
+    .section-row:hover { background-color: var(--cp-color-jacaranda-grey-01); }
+    .section-icon {
+      width: var(--cp-icon-sizing-small);
+      height: var(--cp-icon-sizing-small);
+      color: var(--foodora-pink);
+      flex-shrink: 0;
+    }
+
+    /* ── Verdict row ── */
+    .verdict-row {
+      background-color: var(--cp-color-jacaranda-grey-01);
+    }
+    .verdict-row .label-cell {
+      font: var(--cp-text-subtitle-medium);
+      color: var(--cp-color-jacaranda-grey-80);
+    }
+    .verdict-row .compare-cell {
+      background-color: var(--cp-color-jacaranda-grey-01);
+      padding: var(--cp-spacing-large);
+    }
+    .verdict-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--cp-action-spacing-small) var(--cp-action-spacing-large);
+      border-radius: var(--cp-action-border-radius-pill);
+      font: var(--cp-text-subtitle-small);
+      white-space: nowrap;
+    }
+    .verdict--best    { background: var(--foodora-pink); color: var(--cp-color-jacaranda-grey-00); }
+    .verdict--good    { background: var(--foodora-pink-light); color: var(--foodora-pink-dark); }
+    .verdict--caution { background: var(--cp-color-cape-warning-05); color: var(--cp-color-cape-warning-95); }
+    .verdict--skip    { background: var(--cp-color-cape-danger-05); color: var(--cp-color-cape-danger-60); }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--cp-spacing-xsmall) var(--cp-spacing-small);
+      border-radius: var(--cp-tag-border-radius-medium);
+      font: var(--cp-text-caption);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .tag--success { background: var(--cp-color-cape-success-05); color: var(--cp-color-cape-success-95); }
+    .tag--danger  { background: var(--cp-color-cape-danger-05);  color: var(--cp-color-cape-danger-95);  }
+    .tag--warning { background: var(--cp-color-cape-warning-05); color: var(--cp-color-cape-warning-95); }
+    .tag--pink    { background: var(--foodora-pink-light);        color: var(--foodora-pink-dark);         }
+    .tag--neutral { background: var(--cp-color-jacaranda-grey-05); color: var(--cp-color-jacaranda-grey-80); }
+
+    /* ── No results ── */
+    .no-results {
+      padding: var(--cp-spacing-6xlarge) var(--cp-spacing-3xlarge);
+      text-align: center;
+      font: var(--cp-text-body-medium);
+      color: var(--cp-color-jacaranda-grey-50);
+      width: 100%;
+      display: none;
+    }
+    .no-results.visible { display: block; }
+
+    /* ── Scroll wrapper on small screens ── */
+    .compare-scroll { overflow-x: auto; }
+
+    @media (max-width: 960px) {
+      .nav { padding: var(--cp-spacing-medium) var(--cp-spacing-large); }
+      .page { padding: var(--cp-spacing-3xlarge) var(--cp-spacing-large); }
+      .label-cell { min-width: 120px; width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <span class="nav-brand">foodora</span>
+    <ul class="nav-links">
+      <li><a href="#">Products</a></li>
+      <li><a href="#" aria-current="true">Compare</a></li>
+      <li><a href="#">Shop</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+
+    <!-- ── Header ── -->
+    <div class="page-header">
+      <h1 class="page-title">Robot Vacuum Comparison</h1>
+      <p class="page-subtitle">5 models compared side by side — local control, camera capabilities, cleaning power, and hardware.</p>
+    </div>
+
+    <!-- ── Filters ── -->
+    <div class="filters" role="group" aria-label="Filter vacuums by features">
+      <span class="filters-label">Filter:</span>
+      <button class="filter-chip" data-filter="valetudo" onclick="toggleFilter(this)">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Valetudo (local control)
+      </button>
+      <button class="filter-chip" data-filter="video" onclick="toggleFilter(this)">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Video stream
+      </button>
+      <button class="filter-chip" data-filter="mic" onclick="toggleFilter(this)">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Speaker + Mic
+      </button>
+      <button class="filter-chip" data-filter="dirt" onclick="toggleFilter(this)">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Dirt detection
+      </button>
+      <button class="filter-chip" data-filter="under800" onclick="toggleFilter(this)">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Under $800
+      </button>
+    </div>
+
+    <!-- ── Comparison card ── -->
+    <div class="compare-card">
+      <div class="compare-scroll">
+
+        <!-- Product headers -->
+        <div class="compare-row header-row">
+          <div class="label-cell">
+            <span class="header-count" id="modelCount">5 models</span>
+          </div>
+
+          <div class="compare-cell" data-product="xiaomi">
+            <img class="product-img"
+              src="https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1666877302.02075589.png"
+              alt="Xiaomi Robot Vacuum X10+" loading="lazy" />
+            <span class="product-brand">Xiaomi</span>
+            <span class="product-name">Robot Vacuum X10+</span>
+            <span class="product-price">$449.99</span>
+          </div>
+
+          <div class="compare-cell" data-product="roborock">
+            <img class="product-img"
+              src="https://us.roborock.com/cdn/shop/files/S8_MaxV_Ultra_Black_ID.png"
+              alt="Roborock Qrevo MaxV" loading="lazy" />
+            <span class="product-brand">Roborock</span>
+            <span class="product-name">Qrevo MaxV</span>
+            <span class="product-price">$699.99</span>
+          </div>
+
+          <div class="compare-cell" data-product="eureka">
+            <img class="product-img"
+              src="https://de.eureka.com/cdn/shop/files/j15-max-ultra-nav_ed3b4cde-5114-44fc-b02b-0b7c4f26491c_500x.jpg"
+              alt="Eureka J15 Max Ultra" loading="lazy" />
+            <span class="product-brand">Eureka (Midea)</span>
+            <span class="product-name">J15 Max Ultra</span>
+            <span class="product-price">$1,199.99</span>
+          </div>
+
+          <div class="compare-cell" data-product="mova">
+            <img class="product-img"
+              src="https://us.mova.tech/cdn/shop/files/0-2.jpg"
+              alt="MOVA P10 Pro Ultra" loading="lazy" />
+            <span class="product-brand">MOVA</span>
+            <span class="product-name">P10 Pro Ultra</span>
+            <span class="product-price">$399.00</span>
+          </div>
+
+          <div class="compare-cell" data-product="dreame">
+            <img class="product-img"
+              src="https://global.dreametech.com/cdn/shop/files/x40-ultra-pc-group1_36_1600x.webp"
+              alt="Dreame X40 Ultra" loading="lazy" />
+            <span class="product-brand">Dreame</span>
+            <span class="product-name">X40 Ultra</span>
+            <span class="product-price">$1,299.99</span>
+          </div>
+        </div>
+
+        <!-- ── Section: Local Control ── -->
+        <div class="compare-row section-row">
+          <svg class="section-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2a6 6 0 100 12A6 6 0 008 2zm0 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" fill="currentColor"/>
+          </svg>
+          Local Control
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Valetudo</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--success">Supported</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--danger">No</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Supported</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Supported</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Supported</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Root method</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--neutral">UART</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--danger">None</span></div>
+          <div class="compare-cell best" data-product="eureka"><span class="tag tag--pink">ADB</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--neutral">Fastboot</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--neutral">Fastboot</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Root difficulty</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--success">Easy</span></div>
+          <div class="compare-cell faded" data-product="roborock">—</div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Easy</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Easy</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Easy</span></div>
+        </div>
+
+        <!-- ── Section: Camera Platform ── -->
+        <div class="compare-row section-row">
+          <svg class="section-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M1.5 5A1.5 1.5 0 013 3.5h.379l.862-1.724A.5.5 0 014.69 1.5h6.618a.5.5 0 01.447.276L12.621 3.5H13A1.5 1.5 0 0114.5 5v7A1.5 1.5 0 0113 13.5H3A1.5 1.5 0 011.5 12V5zm6.5 6a3 3 0 100-6 3 3 0 000 6zm0-1.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="currentColor"/>
+          </svg>
+          Camera Platform
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Camera type</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--warning">Nav only</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--warning">Cloud locked</span></div>
+          <div class="compare-cell best" data-product="eureka"><span class="tag tag--pink">FHD + Infrared</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--neutral">RGB</span></div>
+          <div class="compare-cell best" data-product="dreame"><span class="tag tag--pink">8 MP OV8856</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Video stream</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--danger">No</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--warning">Cloud only</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Local</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Local</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Local</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Speaker</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--danger">No</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Yes</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Microphone</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--danger">No</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Yes</span></div>
+        </div>
+
+        <!-- ── Section: Cleaning Autonomy ── -->
+        <div class="compare-row section-row">
+          <svg class="section-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13.5 8A5.5 5.5 0 112.5 8a5.5 5.5 0 0111 0zM8 4.25v4l2.5 1.5-.75 1.25L7 9.25V4.25H8z" fill="currentColor"/>
+          </svg>
+          Cleaning Autonomy
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Suction power</div>
+          <div class="compare-cell" data-product="xiaomi">4,000 Pa</div>
+          <div class="compare-cell faded" data-product="roborock">7,000 Pa</div>
+          <div class="compare-cell best" data-product="eureka">22,000 Pa</div>
+          <div class="compare-cell" data-product="mova">13,000 Pa</div>
+          <div class="compare-cell" data-product="dreame">12,000 Pa</div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Runtime</div>
+          <div class="compare-cell" data-product="xiaomi">120 min</div>
+          <div class="compare-cell faded" data-product="roborock">180 min</div>
+          <div class="compare-cell best" data-product="eureka">360 min</div>
+          <div class="compare-cell" data-product="mova">180 min</div>
+          <div class="compare-cell" data-product="dreame">210 min</div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Dust bag</div>
+          <div class="compare-cell" data-product="xiaomi">60 days</div>
+          <div class="compare-cell faded" data-product="roborock">49 days</div>
+          <div class="compare-cell best" data-product="eureka">75 days</div>
+          <div class="compare-cell best" data-product="mova">75 days</div>
+          <div class="compare-cell best" data-product="dreame">75 days</div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Auto mop wash</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Yes</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Dirt detection</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--danger">No</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Yes</span></div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Multi-floor maps</div>
+          <div class="compare-cell" data-product="xiaomi"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell faded" data-product="roborock"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="eureka"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="mova"><span class="tag tag--success">Yes</span></div>
+          <div class="compare-cell" data-product="dreame"><span class="tag tag--success">Yes</span></div>
+        </div>
+
+        <!-- ── Section: Hardware ── -->
+        <div class="compare-row section-row">
+          <svg class="section-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M5.5 1h5a.5.5 0 01.5.5V3h1a1 1 0 011 1v7a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1h1V1.5a.5.5 0 01.5-.5zM6 3h4V2H6v1zm-2 1v7h8V4H4zm2 1h4v1H6V5zm0 2h4v1H6V7zm0 2h2v1H6V9z" fill="currentColor"/>
+          </svg>
+          Hardware
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">SoC</div>
+          <div class="compare-cell" data-product="xiaomi" style="font: var(--cp-text-body-small); color: var(--cp-color-jacaranda-grey-50);">unknown aarch64</div>
+          <div class="compare-cell faded" data-product="roborock">—</div>
+          <div class="compare-cell" data-product="eureka" style="font: var(--cp-text-body-small); color: var(--cp-color-jacaranda-grey-50);">unknown aarch64</div>
+          <div class="compare-cell" data-product="mova" style="font: var(--cp-text-body-small); color: var(--cp-color-jacaranda-grey-50);">unknown aarch64</div>
+          <div class="compare-cell best" data-product="dreame" style="font: var(--cp-text-body-small);">Allwinner MR813</div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">RAM</div>
+          <div class="compare-cell" data-product="xiaomi">—</div>
+          <div class="compare-cell faded" data-product="roborock">—</div>
+          <div class="compare-cell" data-product="eureka">—</div>
+          <div class="compare-cell" data-product="mova">—</div>
+          <div class="compare-cell best" data-product="dreame">1 GB</div>
+        </div>
+
+        <div class="compare-row">
+          <div class="label-cell">Flash</div>
+          <div class="compare-cell" data-product="xiaomi">—</div>
+          <div class="compare-cell faded" data-product="roborock">—</div>
+          <div class="compare-cell" data-product="eureka">—</div>
+          <div class="compare-cell" data-product="mova">—</div>
+          <div class="compare-cell best" data-product="dreame">4 GB eMMC</div>
+        </div>
+
+        <!-- ── Verdict ── -->
+        <div class="compare-row verdict-row">
+          <div class="label-cell">Verdict</div>
+          <div class="compare-cell" data-product="xiaomi">
+            <span class="verdict-badge verdict--caution">Budget Cleaner</span>
+          </div>
+          <div class="compare-cell faded" data-product="roborock">
+            <span class="verdict-badge verdict--skip">Cloud Only</span>
+          </div>
+          <div class="compare-cell" data-product="eureka">
+            <span class="verdict-badge verdict--best">Spec King</span>
+          </div>
+          <div class="compare-cell" data-product="mova">
+            <span class="verdict-badge verdict--good">Best Value</span>
+          </div>
+          <div class="compare-cell" data-product="dreame">
+            <span class="verdict-badge verdict--best">Camera Pro</span>
+          </div>
+        </div>
+
+        <!-- No results message -->
+        <div class="no-results" id="noResults" role="status">
+          No vacuums match the selected filters. Try removing one or more filters.
+        </div>
+
+      </div><!-- /compare-scroll -->
+    </div><!-- /compare-card -->
+
+  </main>
+
+  <script>
+    const activeFilters = new Set();
+
+    const products = {
+      xiaomi:   { valetudo: true,  video: false, mic: false, dirt: false, price: 449.99  },
+      roborock: { valetudo: false, video: true,  mic: true,  dirt: true,  price: 699.99  },
+      eureka:   { valetudo: true,  video: true,  mic: true,  dirt: true,  price: 1199.99 },
+      mova:     { valetudo: true,  video: true,  mic: true,  dirt: true,  price: 399.00  },
+      dreame:   { valetudo: true,  video: true,  mic: true,  dirt: true,  price: 1299.99 },
+    };
+
+    const checks = {
+      valetudo: p => p.valetudo,
+      video:    p => p.video,
+      mic:      p => p.mic,
+      dirt:     p => p.dirt,
+      under800: p => p.price < 800,
+    };
+
+    function toggleFilter(btn) {
+      const f = btn.dataset.filter;
+      activeFilters.has(f) ? activeFilters.delete(f) : activeFilters.add(f);
+      btn.classList.toggle('active', activeFilters.has(f));
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const visible = {};
+      let count = 0;
+
+      for (const [id, data] of Object.entries(products)) {
+        const passes = [...activeFilters].every(f => checks[f](data));
+        visible[id] = passes;
+        if (passes) count++;
+      }
+
+      // Show/hide all cells per product
+      document.querySelectorAll('[data-product]').forEach(el => {
+        el.dataset.hidden = visible[el.dataset.product] ? 'false' : 'true';
+      });
+
+      // Update counter
+      document.getElementById('modelCount').textContent =
+        activeFilters.size === 0 ? '5 models' : `${count} of 5`;
+
+      // No-results state
+      document.getElementById('noResults').classList.toggle('visible', count === 0);
+    }
+  </script>
+
+</body>
+</html>
